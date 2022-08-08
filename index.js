@@ -30,7 +30,11 @@ app.use(bodyParser.json());
 // /*
 
 ///////////////////////////////////////////////////GET(Read) Queries///////////////////
+app.get('/',(req,res) => {
+  res.send('ok');
+})
 //Read movies
+
 app.get('/movies',(req,res) => {
    Movies.find()
     .then((movies) => {
@@ -51,18 +55,15 @@ app.get('/movies/:title',(req,res) => {
       .catch((err) => {
         console.log(err);
         res.status(400).send("Error " + err);
-
       })
-    
 });
 
-//Show only genre
+//Show movies by genre
 app.get('/movies/genre/:genreName',(req,res) => {
 
-    Movies.find({'Genre.Name' : 'req.params.genreName'})
+    Movies.find({'Genre.Name' : req.params.genreName})
       .then((movie) => {
-        let genre = movie.genre;
-        res.status(201).json(genre);
+        res.status(201).json(movie);
       })
       .catch((err) => {
         console.log(err);
@@ -74,7 +75,7 @@ app.get('/movies/genre/:genreName',(req,res) => {
 
 //Search by Director
 app.get('/movies/directors/:directorName',(req,res) => {
-    Movies.find({'Director.Name' : 'req.params.directorName'})
+    Movies.find({'Director.Name' : req.params.directorName})
       .then((movie) => {
         res.status(201).json(movie);
       })
@@ -117,10 +118,10 @@ app.post('/users' , (req,res) => {
 
 
 //Add favourite movie of User
-app.post('/users/:Username/movies/:movieId' , (req,res) => {
-    Users.findOneAndUpdate({Username : req.body.Username},
+app.post('/users/:Username/favourite/:movieId' , (req,res) => {
+    Users.findOneAndUpdate({Username : req.params.Username},
       {
-        $push : {favoriteMovies : req.params.movieId}
+        $addToSet : {favoriteMovies : req.params.movieId}
       },
       {new :true}),
       (err,updatedUser)=> {
