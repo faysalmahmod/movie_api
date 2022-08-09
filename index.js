@@ -27,6 +27,10 @@ mongoose.connect('mongodb://localhost:27017/myFlixdb', { useNewUrlParser: true, 
 
 
 app.use(bodyParser.json());
+
+let auth = require('./auth')(app);
+const passport= require('passport');
+require('./passport');
 // /*
 
 ///////////////////////////////////////////////////GET(Read) Queries///////////////////
@@ -35,7 +39,7 @@ app.get('/',(req,res) => {
 })
 //Read movies
 
-app.get('/movies',(req,res) => {
+app.get('/movies',passport.authenticate('jwt',{session:false}),(req,res) => {
    Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
@@ -83,6 +87,17 @@ app.get('/movies/directors/:directorName',(req,res) => {
         console.log(err);
         res.status(401).send('Error ' + err);
       });   
+});
+//Get all users data
+app.get('/users',(req,res) => {
+  Users.find()
+   .then((users) => {
+     res.status(201).json(users);
+   })
+   .catch((err) => {
+     console.log(err);
+     res.status(400).send('Error ' + err);
+   });
 });
 
 ///////////////////////////////////////////////////POST (Create)Queries///////////////////
