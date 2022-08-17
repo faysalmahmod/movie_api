@@ -4,7 +4,7 @@ const express = require('express'),
       app = express();
 const mongoose = require('mongoose');
 const Models = require('./models.js');      
-const {check, validateresult} = require('express-validator');
+const {check, validationResult} = require('express-validator');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -111,7 +111,7 @@ app.post('/users',[
   check('Password','Password can not be empty').not().isEmpty(),
   check('Email',"Email doesn't appear to be valid" ).isEmail()
 ] , (req,res) => {
-  let error = validateresult(req);
+  let error = validationResult(req);
   if(!error.isEmpty()){
     return res.status(400).json({errors : error.array()});
   }
@@ -166,13 +166,21 @@ app.post('/users/:Username/favourite/:movieId' ,passport.authenticate('jwt',{ses
     });
 ///////////////////////////////////////////////////PUT (Update)Queries///////////////////
 //Update User Name
-app.put('/users/:name' ,passport.authenticate('jwt',{session:false}), (req,res) => {
+app.put('/users/:name' ,[
+  check('Username' , 'Username must include min 5 characters').isLength({min:5}),
+  check('Username', 'Username contains non-alphanumeric characters which are not allowed').isAlphanumeric(),
+  check('Password','Password can not be empty').not().isEmpty(),
+  check('Email',"Email doesn't appear to be valid" ).isEmail(),
+  check('Birthday','Date is not valid').isDate()
+] , passport.authenticate('jwt',{session:false}), (req,res) => {
+
+  let hashpassword = users.hashpassword(req.body.Password);
   Users.findOneAndUpdate({Username : req.params.name},
     { 
       $set:
           {
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashpassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday
           }
@@ -222,5 +230,7 @@ app.delete('/users/:name',passport.authenticate('jwt',{session:false}), (req, re
     });
 });
 
-
-app.listen(8080, ()=> console.log('Listening at port 8080'));
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+ console.log('Listening on Port ' + port);
+});
