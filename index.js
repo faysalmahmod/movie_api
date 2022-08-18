@@ -41,7 +41,7 @@ app.use(cors());
 app.get('/',(req,res) => {
   res.send('Welcome to myFlix API');
 })
-//Read movies
+//Read movies using authentication
 
 app.get('/movies',passport.authenticate('jwt',{session:false}),(req,res) => {
    Movies.find()
