@@ -4,7 +4,8 @@ const express = require('express'),
       app = express();
 const mongoose = require('mongoose');
 const Models = require('./models.js');      
-const {check, validationResult} = require('express-validator');
+// const {check, validationResult} = require('express-validator');
+const { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -38,9 +39,6 @@ app.use(cors());
 // /*
 
 ///////////////////////////////////////////////////GET(Read) Queries///////////////////
-app.get('/',(req,res) => {
-  res.send('Welcome to myFlix API');
-})
 //Read movies using authentication
 
 app.get('/movies',passport.authenticate('jwt',{session:false}),(req,res) => {
@@ -116,7 +114,7 @@ app.post('/users',[
   if(!error.isEmpty()){
     return res.status(400).json({errors : error.array()});
   }
-  let hashedpassword = Users.hashpassword(req.body.Password);
+  let hashedpassword = Users.hashPassword(req.body.Password);
     Users.findOne({Username : req.body.Username})
       .then((user) => {
         if(user){
@@ -175,7 +173,7 @@ app.put('/users/:name' ,[
   check('Birthday','Date is not valid').isDate()
 ] , passport.authenticate('jwt',{session:false}), (req,res) => {
 
-  let hashpassword = users.hashpassword(req.body.Password);
+  let hashpassword = Users.hashPassword(req.body.Password);
   Users.findOneAndUpdate({Username : req.params.name},
     { 
       $set:
