@@ -11,9 +11,10 @@ const Movies = Models.Movie;
 const Users = Models.User;
 ////Connecting Database
 //  mongoose.connect('mongodb://localhost:27017/myFlixdb', { useNewUrlParser: true, useUnifiedTopology: true });
- const URI = process.env.CONNECTION_URI; //  Hosted DB
 
- mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+
+ mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
 
