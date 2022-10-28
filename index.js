@@ -24,22 +24,22 @@ require('./passport.js');
 const cors = require('cors');
 
 // app.use(cors());
-app.use(cors()); // Allow all domains to access APi
+// app.use(cors()); // Allow all domains to access APi
 
 ///List of allowed domains to access API//
 
-// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
-// app.use(cors({
-//   origin : (origin,callback) => {
-//     if(!origin) return callback(null,true);
-//     if(allowedOrigins.indexOf(origin) === -1){
-//       let messsage = "The CORS policy for this application doesn’t allow access from origin " + origin;
-//       return callback(new Error(messsage),false);
-//     }
-//     return callback(null,true);
-//   }
-// }));
-// /*
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com','http://localhost:1234'];
+app.use(cors({
+  origin : (origin,callback) => {
+    if(!origin) return callback(null,true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      let messsage = "The CORS policy for this application doesn’t allow access from origin " + origin;
+      return callback(new Error(messsage),false);
+    }
+    return callback(null,true);
+  }
+}));
+/*
 
 ///////////////////////////////////////////////////GET(Read) Queries///////////////////
 app.get('/',(req,res) => {
