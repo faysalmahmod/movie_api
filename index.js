@@ -22,8 +22,9 @@ let auth = require('./auth.js')(app);
 const passport= require('passport');
 require('./passport.js');
 const cors = require('cors');
-app.use(cors());
-//app.use(cors()); // Allow all domains to access APi
+
+// app.use(cors());
+app.use(cors()); // Allow all domains to access APi
 
 ///List of allowed domains to access API//
 
