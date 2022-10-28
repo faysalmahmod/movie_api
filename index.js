@@ -39,7 +39,7 @@ app.use(cors({
     return callback(null,true);
   }
 }));
-/*
+
 
 ///////////////////////////////////////////////////GET(Read) Queries///////////////////
 app.get('/',(req,res) => {
