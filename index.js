@@ -28,7 +28,7 @@ const cors = require('cors');
 
 ///List of allowed domains to access API//
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com','http://localhost:1234'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com','http://localhost:1234','https://api-movie-myflix.herokuapp.com'];
 app.use(cors({
   origin : (origin,callback) => {
     if(!origin) return callback(null,true);
