@@ -18,17 +18,14 @@ const Users = Models.User;
 
 app.use(bodyParser.json());
 
-let auth = require('./auth.js')(app);
-const passport= require('passport');
-require('./passport.js');
-const cors = require('cors');
+
 
 // app.use(cors());
 // app.use(cors()); // Allow all domains to access APi
 
 ///List of allowed domains to access API//
-
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com','http://localhost:1234','https://api-movie-myflix.herokuapp.com'];
+const cors = require('cors');
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com','http://localhost:1234','https://api-movie-myflix.herokuapp.com','https://myflixbackend.herokuapp.com'];
 app.use(cors({
   origin : (origin,callback) => {
     if(!origin) return callback(null,true);
@@ -39,6 +36,11 @@ app.use(cors({
     return callback(null,true);
   }
 }));
+
+
+let auth = require('./auth.js')(app);
+const passport= require('passport');
+require('./passport.js');
 
 
 ///////////////////////////////////////////////////GET(Read) Queries///////////////////
