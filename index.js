@@ -72,6 +72,7 @@ app.get('/movies/:title',passport.authenticate('jwt',{session:false}),(req,res) 
       })
 });
 
+
 //Show movies by genre
 app.get('/movies/genre/:genreName',passport.authenticate('jwt',{session:false}),(req,res) => {
 
@@ -109,6 +110,22 @@ app.get('/users',passport.authenticate('jwt',{session:false}),(req,res) => {
      res.status(400).send('Error ' + err);
    });
 });
+
+// READ a user by username 
+app.get(
+  '/users/:username',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Users.findOne({ Username: req.params.Username })
+      .then((user) => {
+        res.json(user);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
+  }
+);
 
 ///////////////////////////////////////////////////POST (Create)Queries///////////////////
 //Add new User
