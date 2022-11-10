@@ -116,7 +116,7 @@ app.get(
   '/users/:username',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Users.findOne({ Username: req.params.Username })
+    Users.findOne({ Username: req.params.username })
       .then((user) => {
         res.json(user);
       })
