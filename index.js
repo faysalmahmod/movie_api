@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 
 ///List of allowed domains to access API//
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com','http://localhost:1234','https://api-movie-myflix.herokuapp.com','https://internationalefilme.netlify.app','https://myflixbackend.herokuapp.com','http://localhost:3000'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com','http://localhost:1234','https://api-movie-myflix.herokuapp.com','https://internationalefilme.netlify.app','http://localhost:3000'];
 app.use(cors({
   origin : (origin,callback) => {
     if(!origin) return callback(null,true);
