@@ -162,8 +162,6 @@ app.get(
 ///////////////////////////////////////////////////POST (Create)Queries///////////////////
 //Add new User
 app.post('/users',[
-  check('Name' , 'Name must include min 5 characters').isLength({min:5}),
-  check('Name', 'Name contains non-alphanumeric characters which are not allowed').isAlphanumeric(),
   check('Username' , 'Username must include min 5 characters').isLength({min:5}),
   check('Username', 'Username contains non-alphanumeric characters which are not allowed').isAlphanumeric(),
   check('Password','Password can not be empty').not().isEmpty(),
@@ -182,7 +180,7 @@ app.post('/users',[
         } else {
           Users
             .create({
-              Name: req.body.Name,
+              Name: req.body.Username,
               Username: req.body.Username,
               Password: hashedpassword,
               Email: req.body.Email,
