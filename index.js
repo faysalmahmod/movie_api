@@ -168,7 +168,7 @@ app.post('/users',[
   check('Username', 'Username contains non-alphanumeric characters which are not allowed').isAlphanumeric(),
   check('Password','Password can not be empty').not().isEmpty(),
   check('Email',"Email doesn't appear to be valid" ).isEmail(),
-  check('Birthday','Date is not valid').isDate()
+  //check('Birthday','Date is not valid').isDate()
 ] , (req,res) => {
   let error = validationResult(req);
   if(!error.isEmpty()){
@@ -186,7 +186,7 @@ app.post('/users',[
               Username: req.body.Username,
               Password: hashedpassword,
               Email: req.body.Email,
-              Birthday : req.body.Birthday,
+              //Birthday : req.body.Birthday,
             })
             .then((user) => {
               res.status(201).json(user);
