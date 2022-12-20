@@ -162,10 +162,13 @@ app.get(
 ///////////////////////////////////////////////////POST (Create)Queries///////////////////
 //Add new User
 app.post('/users',[
+  check('Name' , 'Name must include min 5 characters').isLength({min:5}),
+  check('Name', 'Name contains non-alphanumeric characters which are not allowed').isAlphanumeric(),
   check('Username' , 'Username must include min 5 characters').isLength({min:5}),
   check('Username', 'Username contains non-alphanumeric characters which are not allowed').isAlphanumeric(),
   check('Password','Password can not be empty').not().isEmpty(),
-  check('Email',"Email doesn't appear to be valid" ).isEmail()
+  check('Email',"Email doesn't appear to be valid" ).isEmail(),
+  check('Birthday','Date is not valid').isDate()
 ] , (req,res) => {
   let error = validationResult(req);
   if(!error.isEmpty()){
@@ -179,6 +182,7 @@ app.post('/users',[
         } else {
           Users
             .create({
+              Name: req.body.Name,
               Username: req.body.Username,
               Password: hashedpassword,
               Email: req.body.Email,
@@ -223,6 +227,8 @@ app.post('/users/:Username/favourite/:movieId' ,passport.authenticate('jwt',{ses
 ///////////////////////////////////////////////////PUT (Update)Queries///////////////////
 //Update User Name
 app.put('/users/:name' ,[
+  check('Name' , 'Name must include min 5 characters').isLength({min:5}),
+  check('Name', 'Name contains non-alphanumeric characters which are not allowed').isAlphanumeric(),
   check('Username' , 'Username must include min 5 characters').isLength({min:5}),
   check('Username', 'Username contains non-alphanumeric characters which are not allowed').isAlphanumeric(),
   check('Password','Password can not be empty').not().isEmpty(),
@@ -235,6 +241,7 @@ app.put('/users/:name' ,[
     { 
       $set:
           {
+            Name: req.body.Name,
             Username: req.body.Username,
             Password: hashpassword,
             Email: req.body.Email,
