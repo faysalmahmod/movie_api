@@ -49,8 +49,8 @@ npm run start
 ```
 
 ### ... as a movie enthusiast, who wants to see the movies 
-In order to use the application you have to register as a user at https://moviesapi1.herokuapp.com//users and then
-https://moviesapi1.herokuapp.com//login to get the jwt token.
+In order to use the application you have to register as a user at https://moviesapi1.herokuapp.com/users and then
+https://moviesapi1.herokuapp.com/login to get the jwt token.
 
 ## Technical Requirements (according to project brief)
 
