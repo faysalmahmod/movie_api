@@ -135,8 +135,6 @@ Process:
 * Implement basic HTTP authentication for initial login requests
 * implement login query with generation of JWT token, see screenshot below demonstration working endpoint in Postman:
 
-<img src="https://user-images.githubusercontent.com/99111208/162905239-a86a61ae-ff22-4410-8c8e-4a397dbf5436.png" alt="Screenshot Postman with POST endpoint for login">
-
 * Update Swagger documentation
 
 <img src="https://user-images.githubusercontent.com/99111208/162905204-e4b60cd9-b123-4f71-9ce1-197a0d6c074e.png" alt="Screenshot Swagger documentation updated">
@@ -153,10 +151,6 @@ Process:
 <img src="https://user-images.githubusercontent.com/99111208/163312208-f2e15c6e-30d6-4ae8-b61f-b1221d045922.png" alt="Screenshot test of successful data validation in endpoint POST '/users/{Name}/movies/{Title}">
 
 * Adjust Environment variable to not reveal Connection URI
-
-<img src="https://user-images.githubusercontent.com/99111208/163313326-2c05fa2f-185f-4da8-91e5-04b3bbc79629.png" alt="Screenshot adjusting environment variable on HEROKU">
-
-<img src="https://user-images.githubusercontent.com/99111208/163313342-ecbf4ff4-de6e-47c9-85e3-755742e8c9c7.png" alt="Screenshot adjusting environment variable in code">
 
 
 ## Hosting on MongoDBAtlas (DBaaS) and HEROKU (PaaS)
@@ -175,9 +169,5 @@ Process:
 * add version of node.js (16.14.2) to package.json,
 * change HEROKU version from 20 to 18
 * remove programming/ code errors (reference HEROKU documentation)
- 
 
-## Deployment to HEROKU - FINALLY
-
-<img src="https://user-images.githubusercontent.com/99111208/163316015-6b1cf16d-9469-4f92-85ee-0957de9e3ab2.png" alt="Screenshot app finally online on Heroku">
 
